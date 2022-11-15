@@ -1,0 +1,44 @@
+<%- include('./layouts/cabecera.ejs', {title:'Bienvenido'})%>
+<body>
+    <%- include('./layouts/header.ejs')%>
+
+    <div class="container">
+        <a href="/create" class="btn btn-outline-primary mt-4"><i class='bx bxs-user-plus bx-md'></i></a>
+        <a href="/list" class="btn btn-outline-primary mt-4"><i class='bx bxs-home bx-md'></i></a>
+        <a href="/contrato" class="btn btn-outline-primary mt-4"><i class='bx bxs-wallet bx-md'></i></a>
+
+        <table class="table table-striped table-bordered table-striped text-center mt-4"> 
+            <thead> 
+                <tr class="bg-primary text-white"> 
+                  <th scope="col">ID</th>
+                    <th scope="col">NOMBRE</th>
+                    <th scope="col">DESCRIPCION</th>
+                    <th scope="col">DIRECION</th>
+                    <th scope="col">HABITACIONES</th>
+                    <th scope="col">BANIOS</th>
+                    <th scope="col">MT2</th>
+                    <th scope="col">VIVIENDA</th>
+                    <th scope="col">Contrato</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% results.rows.forEach((i) =>{ %>
+                    <tr>
+                    <td><%= i.id %></td>
+                    <td><%= i.n %></td>
+                    <td><%= i.des %></td>
+                    <td><%= i.dir %></td> 
+                    <td><%= i.h %></td> 
+                    <td><%= i.bn %></td> 
+                    <td><%= i.m %></td> 
+                    <td><%= i.dd %></td> 
+                    <td> <a href="/login" class="btn btn-outline-info "><i class='bx bx-edit-alt bx-md'></i></a></td>
+                </tr>
+                <% }); %>
+            </tbody>
+    </table>
+</div>
+    
+    <%- include('./layouts/footer.ejs'); %>
+</body>
+</html>
