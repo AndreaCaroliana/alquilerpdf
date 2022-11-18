@@ -1,5 +1,10 @@
 const Vivienda = require('../models/Vivienda')
 const PDF = require('pdfkit-construct');
+const pdf = require('html-pdf');
+const path = require('path');
+const fs = require('fs');
+const ejs = require('ejs');
+const { options } = require('pdfkit');
 
 const ViviendaController = {};
 
@@ -10,7 +15,7 @@ ViviendaController.index = async (req, res) => {
 
 
 
-ViviendaController.pdf = async (req, res) => {
+ViviendaController.pendejo = async (req, res) => {
 
     const doc = new PDF({bufferPages: true});
 
@@ -24,22 +29,20 @@ ViviendaController.pdf = async (req, res) => {
     doc.on( 'data', (data) =>{stream.write(data)});
     doc.on('end', () => {stream.end()});
 
-    const vivienda = await Vivienda.get(); 
-    let c=1;
-    
+    const vivi = await Vivienda.get(); 
 
-   const registros = vivienda.map ( (i) =>{
-   
+   const registros = vivi.map((i) => {
     const registro = {
-        //nro: i.id,
+        nro: i.id,
         name: i.n,
         desc: i.des,
         dir:i.dir,
         Hab: i.h,
         Banio:i.bn,
+        mt2:i.mt2,
         Tvivienda: i.dd
     }
-    c++;
+    count++;
     return registro;
    });
 
@@ -57,11 +60,13 @@ ViviendaController.pdf = async (req, res) => {
     });
 
     doc.addTable([
+        {key: 'nro', label: 'nro', align: 'left'},
         {key: 'name', label: 'Nombre', align: 'left'},
         {key: 'desc', label: 'Descripción', align: 'left'},
         {key: 'dir', label: 'Dirección', align: 'right'},
         {key: 'Hab', label: 'Hab'},
         {key: 'Banio', label: 'Banio'},
+        {key: 'mt2', label: 'mt2'},
         {key: 'Tvivienda', label: 'Tvivienda', align: 'right'}
     ], 
     registros, {
@@ -81,5 +86,43 @@ ViviendaController.pdf = async (req, res) => {
     doc.render();
     doc.end();
 }
+
+
+
+ViviendaController.prueba = async (req, res) => {
+
+    const lista = await Vivienda.get();
+
+    const filePath = path.join(__dirname,"../views/PDF/pdfVivienda.ejs")
+    ejs.renderFile(filePath, {lista} ,(err, data) => {
+        
+        if (err) {
+              return res.send(lista);
+        } 
+            
+        const options = {
+            height: "11.25in",
+            with: "6.51in",
+            header: {
+                height:"20mm"
+            },
+            footer:{
+                height:"20mm"
+            }
+        }
+            pdf.create(data, options).toFile("report.pdf", (err, data)=> {
+                if (err) {
+                    res.send(err);
+                } else {
+                    console.log("estoy en la funcion")
+                    res.render("bienvenido");
+                }
+            });
+        
+    
+        return res.send(data);
+    })
+}
+
 
 module.exports = ViviendaController;

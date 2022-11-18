@@ -5,7 +5,7 @@ const routes = express.Router();
 
 routes.get('/vivienda', ViviendaController.index);
 
-routes.get('/pdf-vivenda', ViviendaController.pdf);
+routes.get('/pdf-vivenda', ViviendaController.prueba);
 
 
 module.exports = routes;
