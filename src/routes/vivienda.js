@@ -5,7 +5,7 @@ const routes = express.Router();
 
 routes.get('/vivienda', ViviendaController.index);
 
-routes.get('/pdf-vivenda', ViviendaController.prueba);
+routes.get('/pdf-vivenda', ViviendaController.pendejo);
 
 
 module.exports = routes;

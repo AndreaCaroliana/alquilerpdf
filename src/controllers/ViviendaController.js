@@ -10,7 +10,7 @@ const ViviendaController = {};
 
 ViviendaController.index = async (req, res) => {
     const viviendas = await Vivienda.get();
-    res.render('vivienda', {viviendas});
+    res.render('viviendac', {viviendas});
 };
 
 
@@ -31,21 +31,24 @@ ViviendaController.pendejo = async (req, res) => {
 
     const vivi = await Vivienda.get(); 
 
-   const registros = vivi.map((i) => {
-    const registro = {
+    /////console.log("vivi: ",vivi.rows);
+    let count=1;
+   const registros = vivi.rows.map(i => {
+    console.log(i) ;
+   const registro = {
         nro: i.id,
         name: i.n,
         desc: i.des,
         dir:i.dir,
         Hab: i.h,
         Banio:i.bn,
-        mt2:i.mt2,
+        mt2:i.m,
         Tvivienda: i.dd
+        
     }
     count++;
     return registro;
-   });
-
+   })
     doc.setDocumentHeader({}, () => {
 
         doc.text('Listado de Viviendas', {
@@ -92,7 +95,7 @@ ViviendaController.pendejo = async (req, res) => {
 ViviendaController.prueba = async (req, res) => {
 
     const lista = await Vivienda.get();
-
+    console.log(lista);
     const filePath = path.join(__dirname,"../views/PDF/pdfVivienda.ejs")
     ejs.renderFile(filePath, {lista} ,(err, data) => {
         
