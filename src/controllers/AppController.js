@@ -10,4 +10,6 @@ AppController.viviendas = (req, results) => {
     results.render('vivienda');
 }
 
+
+
 module.exports = AppController;

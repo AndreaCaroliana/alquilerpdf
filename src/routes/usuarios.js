@@ -5,7 +5,7 @@ const routes = express.Router();
 
 routes.get('/usuario', UsuarioController.index);
 
-routes.get('/pdf-vivenda', UsuarioController.pendejo);
+routes.get('/pdf-usuario', UsuarioController.pendejo);
 
 
 module.exports = routes;

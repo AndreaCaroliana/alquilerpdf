@@ -81,9 +81,6 @@ ViviendaController.pendejo = async (req, res) => {
         headAlign: 'center'
     });
     
-
- 
-
     doc.render();
     doc.end();
 }

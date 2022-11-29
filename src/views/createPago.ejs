@@ -1,0 +1,36 @@
+<%- include('./layouts/cabecera.ejs', {title:'Vivienda'})%>
+<body>
+    <%- include('./layouts/header.ejs')%>
+
+
+    <div class="container mt-4">
+        <div class="card border-secondary">
+           <div class="card-header">Nuevo Pago</div>
+           <div class="card-body">
+
+            <form action="/save" method="post">
+
+                <div class="mb-3">
+                  <label class="form-label">Concepto</label>
+                  <input type="text" class="form-control" id="concepto" name="concepto" >
+                </div>
+                <div class="mb-3">
+                    <label for="start">Fecha</label>
+                    <input type="date" id="fecha" name="fecha"
+                     value="2018-07-22"
+                    min="2022-01-01" max="2050-12-31">
+                  </div>
+                  <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label"> Monto </label>
+                    <input type="text" class="form-control" id="telefono" name="telefono">
+                  </div> 
+                <button type="submit" class="btn btn-primary">Guardar</button>
+                <a href="/" class="btn btn-secondary">Cancel</a>
+              </form>
+           </div>
+        </div>
+    </div>
+
+    <%- include('./layouts/footer.ejs'); %>
+</body>
+</html>

@@ -1,6 +1,5 @@
 const Usuario = require('../models/Usuario')
 const PDF = require('pdfkit-construct');
-const pdf = require('html-pdf');
 const path = require('path');
 const fs = require('fs');
 const ejs = require('ejs');
@@ -16,7 +15,7 @@ UsuarioController.pendejo = async (req, res) => {
 
     const doc = new PDF({bufferPages: true});
 
-    const filaname = `Factua ${Date.now()}.pdf`
+    const filaname = `Factura ${Date.now()}.pdf`
 
     const stream = res.writeHead(200, {
         'Content-Type': 'application/pdf',
@@ -33,20 +32,17 @@ UsuarioController.pendejo = async (req, res) => {
     console.log(i) ;
    const registro = {
         nro: i.id,
-        name: i.n,
-        desc: i.des,
-        dir:i.dir,
-        Hab: i.h,
-        Banio:i.bn,
-        mt2:i.m,
-        Tvivienda: i.dd   
+        name: i.nombre ? i.nombre : '',
+        email: i.email ? i.email : '',
+        pwd: i.pwd ? i.pwd : '',
+        tel: i.telefono ? i.telefono : ''
     }
     count++;
     return registro;
    })
     doc.setDocumentHeader({}, () => {
 
-        doc.text('Listado de Viviendas', {
+        doc.text('Lista de Usuarios', {
             width:420,
             align: 'center'
         })
@@ -60,12 +56,9 @@ UsuarioController.pendejo = async (req, res) => {
     doc.addTable([
         {key: 'nro', label: 'nro', align: 'left'},
         {key: 'name', label: 'Nombre', align: 'left'},
-        {key: 'desc', label: 'Descripción', align: 'left'},
-        {key: 'dir', label: 'Dirección', align: 'right'},
-        {key: 'Hab', label: 'Hab'},
-        {key: 'Banio', label: 'Banio'},
-        {key: 'mt2', label: 'mt2'},
-        {key: 'Tvivienda', label: 'Tvivienda', align: 'right'}
+        {key: 'email', label: 'Email', align: 'left'},
+        {key: 'pwd', label: 'pwd', align: 'right'},
+        {key: 'tel', label: 'Telefono', align: 'right'}
     ], 
     registros, {
         border: null,
@@ -77,6 +70,10 @@ UsuarioController.pendejo = async (req, res) => {
         marginRight: 45,
         headAlign: 'center'
     });
+
+    console.log(doc)
+  
+       
 
     doc.render();
     doc.end();
