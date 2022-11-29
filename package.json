@@ -1,0 +1,26 @@
+{
+  "name": "pdf",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^3.1.8",
+    "express": "^4.18.2",
+    "express-handlebars": "^6.0.6",
+    "html-pdf": "^3.0.1",
+    "moment": "^2.29.4",
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.20",
+    "pdf-creator-node": "^2.3.5",
+    "pdfkit": "^0.13.0",
+    "pdfkit-construct": "^1.2.3",
+    "pg": "^8.8.0"
+  }
+}

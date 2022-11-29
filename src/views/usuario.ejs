@@ -1,0 +1,36 @@
+<%- include('./layouts/cabecera.ejs', {title:'Bienvenido'})%>
+<body>
+    <%- include('./layouts/header.ejs')%>
+    <div class="container">
+        <a href="/create" class="btn btn-outline-primary mt-4"><i class='bx bxs-user-plus bx-md'></i></a>
+        <a href="/list" class="btn btn-outline-primary mt-4"><i class='bx bxs-home bx-md'></i></a>
+        <a href="/contrato" class="btn btn-outline-primary mt-4"><i class='bx bxs-wallet bx-md'></i></a> 
+        <a href="/pdf-usuario" class="btn btn-outline-danger mt-4"><i class='bx bxs-file-pdf bx-md'></i></a>
+        <table class="table table-striped table-bordered table-striped text-center mt-4"> 
+            <thead> 
+                <tr class="bg-primary text-white"> 
+                    <th scope="col">ID</th>
+                    <th scope="col">NOMBRE</th>
+                    <th scope="col">EMAIL</th>
+                    <th scope="col">TELEFONO</th>
+                    <th scope="col">VIVIENDA</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% usuario.rows.forEach((i) =>{ %>
+                    <tr>
+                    <td><%= i.id %></td>
+                    <td><%= i.nombre %></td>
+                    <td><%= i.email %></td>
+                    <td><%= i.telefono %></td> 
+                    <td> <a href="/list" class="btn btn-outline-info border-0"><i class='bx bxs-home bx-md'></i></a></td> 
+                </tr>
+                <% }); %>
+            </tbody>
+    </table>
+</div>
+    
+    <%- include('./layouts/footer.ejs'); %>
+</body>
+</html>
+

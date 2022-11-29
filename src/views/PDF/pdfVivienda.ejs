@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Lista de Viviendas</title>
+  
+</head>
+  <body>
+    <div>
+        <table> 
+            <thead> 
+                <tr> 
+                  <th>ID</th>
+                  <th>NOMBRE</th>
+                  <th>DESCRIPCION</th>
+                  <th>DIRECION</th>
+                  <th>HABITACIONES</th>
+                  <th>BANIOS</th>
+                  <th>MT2</th>
+                  <th>VIVIENDA</th>
+                      
+                    </tr>
+                </thead>
+                <tbody>
+                  <% lista.rows.forEach((i) =>{ %>
+                    <tr>
+                    <td><%= i.id %></td> 
+                    <td><%= i.n %></td>
+                    <td><%= i.des %></td>
+                    <td><%= i.dir %></td> 
+                    <td><%= i.h %></td> 
+                    <td><%= i.bn %></td> 
+                    <td><%= i.m %></td> 
+                    <td><%= i.dd %></td> 
+                    
+                </tr>
+                <% }); %>
+                </tbody>
+        </table>
+    </div>
+
+    <style>
+        table, td, th {
+          border: 1px solid black;
+          border-collapse: collapse;
+        }
+    </style>
+  </body>
+</html>
